@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        /*取消图片底部3像素距离*/
+        .box {
+            width: 300px;
+            height: 200px;
+            margin: 100px auto;
+            background-color: pink;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box ul li {
+            float: left;
+        }
+
+        .box ul {
+            width: 1500px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="screen">
+    <ul>
+        <li><img src="images/01.jpg" alt=""/></li>
+        <li><img src="images/02.jpg" alt=""/></li>
+        <li><img src="images/03.jpg" alt=""/></li>
+        <li><img src="images/04.jpg" alt=""/></li>
+        <li><img src="images/01.jpg" alt=""/></li>
+    </ul>
+</div>
+<script>
+    //找人
+    var screen = document.getElementById("screen");
+    var ul = screen.children[0];
+    var timer = null;
+    //鼠标经过screen 停止动画
+    screen.onmouseover = function () {
+        clearInterval(timer);
+    }
+    screen.onmouseout = function () {
+        timer = setInterval(play, 15);
+    }
+
+    //移动ul
+    timer = setInterval(play, 15);
+
+    function play() {
+        //leader = leader + step
+        var leader = ul.offsetLeft;
+        if (leader > -1200) {
+            var step = -5;
+            leader = leader + step;
+            ul.style.left = leader + "px";
+        } else {
+            ul.style.left = 0 + "px";
+        }
+    }
+
+</script>
+</body>
+</html>
